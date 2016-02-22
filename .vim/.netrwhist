@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/home/jl/.vim/bundle/taglist'
+let g:netrw_dirhist_2='/home/jl/.vim/bundle/taglist/doc'
+let g:netrw_dirhist_3='/tmp/ttl'
+let g:netrw_dirhist_4='/home/jl/.Genymobile/Genymotion/deployed/Google Nexus 5 - 5.1.0 - API 22 - 1080x1920'
+let g:netrw_dirhist_5='/home/jl/dev/workspace/jl/brainspill-python'
