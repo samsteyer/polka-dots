@@ -27,7 +27,7 @@ set nolist
 set colorcolumn=100
 "set textwidth=100
 "set wrapmargin=0
-colorscheme industry
+colorscheme twilight
 
 nnoremap <C-S-k> ddkP
 nnoremap <C-S-j> ddp
