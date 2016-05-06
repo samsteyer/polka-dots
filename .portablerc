@@ -1,0 +1,2 @@
+export PS1="\e[92m\u\e[39m@\e[94m\h\e[39m:\e[95m\W \e[39m$ "
+export EDITOR=vim
