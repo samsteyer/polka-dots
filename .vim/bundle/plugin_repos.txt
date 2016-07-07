@@ -1,4 +1,6 @@
 https://github.com/mbbill/code_complete.git
+git@github.com:rust-lang/rust.vim.git
+git@github.com:racer-rust/vim-racer.git
 git@github.com:oplatek/Conque-Shell.git
 https://github.com/chrisbra/csv.vim.git
 https://github.com/davidhalter/jedi-vim.git

@@ -31,6 +31,7 @@ set wrap
 set linebreak
 set nolist
 set colorcolumn=100
+set textwidth=100
 colorscheme twilight
 
 nnoremap <C-S-k> ddkP
