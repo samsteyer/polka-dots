@@ -30,9 +30,11 @@ set tags=./tags;/
 set wrap
 set linebreak
 set nolist
-set colorcolumn=100
-set textwidth=100
-colorscheme twilight
+set colorcolumn=72
+set textwidth=72
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized
 
 nnoremap <C-S-k> ddkP
 nnoremap <C-S-j> ddp
