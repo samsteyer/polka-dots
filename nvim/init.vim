@@ -29,7 +29,7 @@ Plug 'jacoborus/tender.vim'
 Plug 'kristijanhusak/vim-hybrid-material'
 call plug#end()
 
-syntax on
+syntax enable
 filetype plugin indent on
 
 colorscheme gruvbox
@@ -121,8 +121,11 @@ let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_w = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_flake8_args = '--max-line-length=100'
 
 let g:rustfmt_autosave = 1
 
 let g:racer_cmd = "/home/jl/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
+
+let g:gitgutter_override_sign_column_highlight = 0
