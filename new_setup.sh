@@ -2,10 +2,13 @@
 
 SCRIPTPATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
-ln -s $SCRIPTPATH/.vimrc $HOME/.vimrc
-ln -s $SCRIPTPATH/.vim $HOME/.vim
-ln -s $SCRIPTPATH/.portablerc $HOME/.portablerc
+if [ ! -L $HOME/.config/nvim ]; then
+	mkdir -p $HOME/.config
+	ln -s $SCRIPTPATH/nvim/ $HOME/.config/nvim
+fi
 
-exec $SCRIPTPATH/fetch_plugin_repos.sh
 
-echo 'source $HOME/.portablerc' >> $HOME/.bash_profile
+if [ ! -L $HOME/.portablerc ]; then
+	ln -s $SCRIPTPATH/.portablerc $HOME/.portablerc
+	echo 'source $HOME/.portablerc' >> $HOME/.bash_profile
+fi
