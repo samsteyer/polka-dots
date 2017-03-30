@@ -12,3 +12,7 @@ if [ ! -L $HOME/.portablerc ]; then
 	ln -s $SCRIPTPATH/.portablerc $HOME/.portablerc
 	echo 'source $HOME/.portablerc' >> $HOME/.bash_profile
 fi
+
+if [ ! -L $HOME/.Xresources ]; then
+	ln -s $SCRIPTPATH/.Xresources $HOME/.Xresources
+fi
