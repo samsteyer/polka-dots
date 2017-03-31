@@ -130,3 +130,8 @@ let g:racer_cmd = "/home/jl/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
 
 let g:jedi#completions_enabled = 0
+
+let g:gitgutter_sign_column_always = 1
+let g:gitgutter_override_sign_column_highlight = 0
+
+highlight SignColumn ctermbg=black
