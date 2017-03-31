@@ -7,6 +7,7 @@ Plug 'Shougo/vimshell.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-go', { 'do': 'make'}
@@ -17,7 +18,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
-Plug 'bling/vim-bufferline'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 Plug 'vim-syntastic/syntastic'
@@ -29,7 +29,7 @@ Plug 'jacoborus/tender.vim'
 Plug 'kristijanhusak/vim-hybrid-material'
 call plug#end()
 
-syntax on
+syntax enable
 filetype plugin indent on
 
 colorscheme gruvbox
@@ -81,6 +81,27 @@ vnoremap <C-S-k> xkP`[V`]
 vnoremap <C-S-j> xp`[V`]
 
 nnoremap <silent> <F6> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
+" Super tab navigation!
+nnoremap <C-t>h :tabprevious<CR>
+nnoremap <C-t>l :tabnext<CR>
+nnoremap <C-t>n :tabnew<CR>
+nnoremap <C-t>e :tabedit<space>
+nnoremap <C-t>d :tabclose<CR>
+nnoremap <A-1> 1gt
+nnoremap <A-2> 2gt
+nnoremap <A-3> 3gt
+nnoremap <A-4> 4gt
+nnoremap <A-5> 5gt
+nnoremap <A-6> 6gt
+nnoremap <A-7> 7gt
+nnoremap <A-8> 8gt
+nnoremap <A-9> 9gt
+nnoremap <A-0> 10gt
+" For now, comment this out, as it tends to duplicate the first tab
+" autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
+
+
 map <silent> <C-f> :BLines<CR>
 map <silent> <C-n> :FZF!<CR>
 map <silent> <F4> :call BackgroundToggle()<CR>
@@ -114,6 +135,14 @@ let g:airline_symbols.linenr = ''
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+
+let g:jedi#completions_enabled = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
+let g:jedi#show_call_signatures = 0
+let g:jedi#use_tabs_not_buffers = 1
+" The most jarring, obnoxious part of jedi-vim
+let g:jedi#smart_auto_mappings = 0
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
