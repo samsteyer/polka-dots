@@ -15,12 +15,14 @@ Plug 'rust-lang/rust.vim'
 Plug 'sebastianmarkow/deoplete-rust'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/vim-slash'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'bling/vim-bufferline'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 Plug 'vim-syntastic/syntastic'
+Plug 'davidhalter/jedi-vim'
 " Colorschemes
 Plug 'freeo/vim-kalisi'
 Plug 'morhetz/gruvbox'
@@ -98,7 +100,6 @@ let g:deoplete#enable_smart_case = 1
 
 let g:neosnippet#enable_completed_snippet = 1
 
-" Fixes for airline symbols
 let g:airline_powerline_fonts = 1
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -127,3 +128,5 @@ let g:rustfmt_autosave = 1
 
 let g:racer_cmd = "/home/jl/.cargo/bin/racer"
 let g:racer_experimental_completer = 1
+
+let g:jedi#completions_enabled = 0
