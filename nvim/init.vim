@@ -21,6 +21,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 Plug 'vim-syntastic/syntastic'
+Plug 'vim-scripts/excel.vim'
+Plug 'vim-scripts/dbext.vim'
 " Colorschemes
 Plug 'freeo/vim-kalisi'
 Plug 'morhetz/gruvbox'
