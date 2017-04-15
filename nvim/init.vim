@@ -23,6 +23,7 @@ Plug 'jreybert/vimagit'
 Plug 'vim-syntastic/syntastic'
 Plug 'vim-scripts/excel.vim'
 Plug 'vim-scripts/dbext.vim'
+Plug 'chr4/nginx.vim'
 " Colorschemes
 Plug 'freeo/vim-kalisi'
 Plug 'morhetz/gruvbox'
