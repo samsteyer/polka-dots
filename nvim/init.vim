@@ -3,7 +3,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'Shougo/vimproc.vim', {'do' : 'make'}
-Plug 'Shougo/vimshell.vim'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -20,11 +19,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
-Plug 'vim-syntastic/syntastic'
 Plug 'vim-scripts/excel.vim'
 Plug 'vim-scripts/dbext.vim'
 Plug 'chr4/nginx.vim'
+Plug 'janko-m/vim-test'
+Plug 'neomake/neomake'
+Plug 'gbigwood/Clippo'
 " Colorschemes
+Plug 'flazz/vim-colorschemes' " One to rule them all?
 Plug 'freeo/vim-kalisi'
 Plug 'morhetz/gruvbox'
 Plug 'fcpg/vim-orbital'
@@ -35,7 +37,7 @@ call plug#end()
 syntax enable
 filetype plugin indent on
 
-colorscheme gruvbox
+colorscheme PaperColor
 set background=dark
 
 set t_Co=256
@@ -61,7 +63,7 @@ set nobackup
 set nowritebackup
 set wildmenu
 set nu
-set tags=./tags;/
+set tags=~/.tags;/
 set wrap
 set linebreak
 set nolist
@@ -104,18 +106,48 @@ nnoremap <A-0> 10gt
 " For now, comment this out, as it tends to duplicate the first tab
 " autocmd BufAdd * exe 'tablast | tabe "' . expand( "<afile") .'"'
 
+" Terminal customizations
+tnoremap <Esc> <C-\><C-n>
+map <silent> <C-\> :vsplit term://bash<CR> i
 
-map <silent> <C-f> :BLines<CR>
-map <silent> <C-n> :FZF!<CR>
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+    lclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open location panel
+        lopen
+    endif
+endfunction
+
+function! ToggleTests()
+    let old_last_winnr = winnr('$')
+    cclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open quickfix panel
+        copen
+    endif
+endfunction
+
+" Location/quickfix list customizations
+nnoremap <silent> <C-e> :<C-u>silent! call ToggleErrors()<CR>
+nnoremap <silent> <C-q> :<C-u>silent! call ToggleTests()<CR>
+
+map <silent> <C-f> :Lines<CR>
+map <silent> <C-t> :Tags<CR>
+map <silent> <C-n> :FZF<CR>
 map <silent> <F4> :call BackgroundToggle()<CR>
-map <silent> <F12> :VimShell<CR>
 map <F7> mzgg=G`z<CR>
 map <silent> <F8> :TagbarToggle<CR>
 map <silent> <F9> :NERDTreeToggle<CR>
-map <silent> <ESC> :pclose<CR>:lclose<CR>
+map <silent> <ESC> :pclose<CR> :lclose<CR> :cclose<CR>
 
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+autocmd BufEnter * Neomake
+autocmd! BufWritePost * Neomake
+autocmd BufWritePost *.py PyTest
 
+let g:python_host_prog = '/usr/bin/python2'
+let g:deoplete#sources#jedi#python_path = '/usr/bin/python2'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 50
 let g:deoplete#enable_smart_case = 1
@@ -136,7 +168,7 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=\ %#ErrorMsg#%{neomake#statusline#QflistStatus('qf:\ ')}
 set statusline+=%*
 
 let g:jedi#completions_enabled = 0
@@ -147,14 +179,21 @@ let g:jedi#use_tabs_not_buffers = 1
 " The most jarring, obnoxious part of jedi-vim
 let g:jedi#smart_auto_mappings = 0
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_w = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_checkers = ['flake8']
+let g:fzf_tags_command = 'ctags -R -a -f ~/.tags'
+let g:fzf_action = {
+  \ 'enter': 'tab split',
+  \ 'esc': 'close',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+let g:neomake_open_list = 0
+let g:neomake_python_enabled_makers = ['flake8']
+" let g:neomake_javascript_enabled_makers = ['eslint']
+let test#strategy = 'neomake'
+let test#python#runner = 'pytest'
+let g:test#runner_commands = ['PyTest']
 
 let g:rustfmt_autosave = 1
 
-let g:racer_cmd = "/home/jl/.cargo/bin/racer"
+let g:racer_cmd = '/home/jl/.cargo/bin/racer'
 let g:racer_experimental_completer = 1
