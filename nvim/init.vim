@@ -18,6 +18,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-slash'
 Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'jreybert/vimagit'
 Plug 'vim-scripts/excel.vim'
@@ -38,7 +39,7 @@ call plug#end()
 syntax enable
 filetype plugin indent on
 
-colorscheme PaperColor
+colorscheme hybrid_material
 set background=dark
 
 set t_Co=256
@@ -166,12 +167,12 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+let g:airline_theme = "hybrid"
 
 set statusline+=%#warningmsg#
 set statusline+=\ %#ErrorMsg#%{neomake#statusline#QflistStatus('qf:\ ')}
 set statusline+=%*
 
-<<<<<<< HEAD
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
@@ -179,7 +180,6 @@ let g:syntastic_check_on_w = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args = '--max-line-length=100'
-=======
 let g:jedi#completions_enabled = 0
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
@@ -201,7 +201,6 @@ let g:neomake_python_enabled_makers = ['flake8']
 let test#strategy = 'neomake'
 let test#python#runner = 'pytest'
 let g:test#runner_commands = ['PyTest']
->>>>>>> upstream/master
 
 let g:rustfmt_autosave = 1
 
