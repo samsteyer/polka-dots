@@ -74,13 +74,13 @@ set textwidth=100
 set clipboard=unnamed
 
 " Simple function to make it easier to toggle the background color
-function BackgroundToggle()
-    if &background == "light"
-        set background=dark
-    else
-        set background=light
-    endif
-endfunction
+" function BackgroundToggle()
+"     if &background == "light"
+"         set background=dark
+"     else
+"         set background=light
+"     endif
+" endfunction
 
 nnoremap <C-S-k> ddkP
 nnoremap <C-S-j> ddp
