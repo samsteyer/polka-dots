@@ -176,8 +176,16 @@ autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2
 autocmd FileType yml setlocal ts=2 sts=2 sw=2
 
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python2'
+let g:python_host_prog = '/usr/local/opt/python/libexec/bin/python'
+let g:deoplete#sources#jedi#python_path = '/usr/local/opt/python/libexec/bin/python'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 50
 let g:deoplete#enable_smart_case = 1
