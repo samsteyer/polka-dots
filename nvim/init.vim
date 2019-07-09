@@ -6,6 +6,7 @@ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'majutsushi/tagbar'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'python/black'
 Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
 Plug 'zchee/deoplete-clang'
@@ -34,6 +35,25 @@ Plug 'morhetz/gruvbox'
 Plug 'fcpg/vim-orbital'
 Plug 'jacoborus/tender.vim'
 Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'posva/vim-vue'
+Plug 'prettier/vim-prettier', {
+  \ 'do': 'yarn install',
+  \ 'branch': 'release/1.x',
+  \ 'for': [
+    \ 'javascript',
+    \ 'typescript',
+    \ 'css',
+    \ 'less',
+    \ 'scss',
+    \ 'json',
+    \ 'graphql',
+    \ 'markdown',
+    \ 'vue',
+    \ 'lua',
+    \ 'php',
+    \ 'ruby',
+    \ 'html',
+    \ 'swift' ] }
 call plug#end()
 
 syntax enable
@@ -72,6 +92,8 @@ set nolist
 set colorcolumn=100
 set textwidth=100
 set clipboard=unnamed
+let g:prettier#config#tab_width = 2
+let g:prettier#config#print_width = 80
 
 " Simple function to make it easier to toggle the background color
 " function BackgroundToggle()
@@ -145,11 +167,17 @@ map <silent> <ESC> :pclose<CR> :lclose<CR> :cclose<CR>
 
 autocmd BufEnter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 autocmd BufEnter * Neomake
+autocmd BufWritePre *.py execute ':Black'
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.vue,*.yaml,*.html Prettier
 autocmd! BufWritePost * Neomake
 autocmd BufWritePost *.py PyTest
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2
+autocmd FileType yml setlocal ts=2 sts=2 sw=2
 
-let g:python_host_prog = '/usr/bin/python2'
-let g:deoplete#sources#jedi#python_path = '/usr/bin/python2'
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:deoplete#sources#jedi#python_path = '/usr/local/bin/python2'
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#auto_complete_delay = 50
 let g:deoplete#enable_smart_case = 1
@@ -197,6 +225,7 @@ let g:fzf_action = {
 
 let g:neomake_open_list = 0
 let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_python_flake8_maker = { 'args': ['--max-line-length=100'], }
 " let g:neomake_javascript_enabled_makers = ['eslint']
 let test#strategy = 'neomake'
 let test#python#runner = 'pytest'
